@@ -1,22 +1,22 @@
--raw-not-in-call   = Not in call.
--raw-not-streaming = Not streaming.
+-raw-not-in-call   = Qrupda səsli söhbət açıq deyil
+-raw-not-streaming = Hazırda mahnı oxumur.
 -error             = ❌ | <b>{$t}</b>
 -ok                = ✅ | <b>{$t}</b>
 -response          = {$e} | <b>{$t}</b>
--not-in-call       = {-error(t: "Not in call.")}
--not-streaming     = {-error(t: "Not streaming.")}
+-not-in-call       = {-error(t: "Hazırda mahnı oxumur.")}
+-not-streaming     = {-error(t: "Hazırda mahnı oxumur")}
 
 not-in-call     = {-not-in-call}
 not-streaming   = {-not-streaming}
 raw-not-in-call = {-raw-not-in-call}
 
 errors =
-    .no-call        = {-error(t: "No active call.")}
-    .no-video-found = {-error(t: "No video found.")}
-    .unknown        = {-error(t: "An error occurred.")}
-    .file-too-big   = {-error(t: "This file is too big.")}
-    .no-assistant   = {-error(t: "My assistant is not here.")}
-    .error          = {-error(t: "An error occurred:")} {$message}
+    .no-call        = {-error(t: "Hazırda mahnı oxumur.")}
+    .no-video-found = {-error(t: "Mahnı tapılmadı.")}
+    .unknown        = {-error(t: "Xəta baş verdi.")}
+    .file-too-big   = {-error(t: "Bu fayl çox böyükdür.")}
+    .no-assistant   = {-error(t: "Mənim asistanım bu qrupda yoxdu!")}
+    .error          = {-error(t: "Xəta baş verdi:")} {$message}
 
 inputs =
     .audio-file    = Audio File
@@ -24,23 +24,23 @@ inputs =
     .voice-message = Voice Message
 
 shuffle =
-    .shuffling      = {-response(e: "🔀", t: "Shuffling...")}
-    .no-enough-items = {-error(t: "No enough items to shuffle.")}
+    .shuffling      = {-response(e: "🔀", t: "Qarışdırılır...")}
+    .no-enough-items = {-error(t: "Qarışdırmaq üçün kifayət qədər element yoxdur.")}
 
-cache = {-response(e: "🗑", t: "Caches deleted.")}
+cache = {-response(e: "🗑", t: "Keşlər silindi.")}
 
-now = 🎵 | Currently streaming <b><a href="{$titleUrl}">{$title}</a></b> by <b><a href="{$requesterUrl}">{$requester}</a></b>...
+now = 🎵 | Hazırda yayımlanır <b><a href="{$titleUrl}">{$title}</a></b> by <b><a href="{$requesterUrl}">{$requester}</a></b>...
 
 panel = 
     .text = {$nowEmoji} | <b><a href="{$nowUrl}">{$now}</a></b>
     ➡️ | <b><a href="{$nextUrl}">{$next}</a></b>
-    .updated = Updated.
-    .nothing-now   = Nothing streaming now
-    .nothing-next  = Nothing streaming next
+    .updated = Yenilənib.
+    .nothing-now   = İndi heç nə yayımlanmır
+    .nothing-next  = Sonrakı heç nə yayımlanmır
 
     .pause = {
         $result ->
-        [true] Paused.
+        [true] Fasilə verildi.
         [false] {-raw-not-streaming}
         *[null] {-raw-not-in-call}
     }
@@ -68,39 +68,39 @@ panel =
 
     .mute = {
         $result ->
-        [true] Muted.
-        [false] Already muted.
+        [true] Səssiz.
+        [false] Artıq səssizdir.
         *[null] {-raw-not-in-call}
     }
 
     .unmute = {
         $result ->
-        [true] Unmuted.
-        [false] Not muted.
+        [true] Səssizdən çıxarıldı.
+        [false] Səssiz deyil.
         *[null] {-raw-not-in-call}
     }
 
-    .shuffling       = Shuffling...
-    .volume          = Volume set to {$amount}.
-    .no-enough-items = No enough items to shuffle.
+    .shuffling       = Qarışdırılır...
+    .volume          = Səs səviyyəsi təyin edildi {$amount}.
+    .no-enough-items = Qarışdırmaq üçün kifayət qədər element yoxdur.
 
 playlist =
-    .queuing           = 🎶 | <b>Queuing {$x} items...</b>
-    .streaming-queuing = 🎶 | <b>Streaming and queuing {$x} items...</b>
+    .queuing           = 🎶 | <b>{$x} element növbəyə qoyulur...</b>
+    .streaming-queuing = 🎶 | <b>{$x} element yayımlanır və növbəyə qoyulur...</b>
 
 volume =
-    .set     = 🔈 | <b>Volume set to {$amount}.</b>
-    .invalid = {-error(t: "Pass a number between 0 and 200.")}
+    .set     = 🔈 | <b>Səs {$amount} olaraq ayarlandı.</b>
+    .invalid = {-error(t: "0 ilə 200 arasında bir rəqəm keçin.")}
 
 lyrics =
-    .not-found = {-error(t: "Lyrics not found.")}
+    .not-found = {-error(t: "Mahnı sözləri tapılmadı.")}
     .lyrics    = <b>{$title}</b> #lyrics
     
     {$lyrics}
 
 search =
-    .canceled         = {-ok(t: "Search canceled.")},
-    .no-results-found = {-error(t: "No results found.")}
+    .canceled         = {-ok(t: "Axtarış ləğv edildi.")},
+    .no-results-found = {-error(t: "Heç bir nəticə tapılmadı.")}
     .active           = {-error(t: "There is an active search.")}
     .not_active       = {-error(t: "There is no search active.")}
     .header           = <b>🔍 | Search results for {$query}...</b>
@@ -114,54 +114,54 @@ search =
         {"  "}└ 👤 {$uploader}
 
 stream =
-    .streaming = {-response(e: "▶️", t: "Streaming...")}
-    .queued-at =  #️⃣ | <b>Queued at position {$position}.</b>
-    .no-input = {-response(e: "❔", t: "What do you want to stream?")}
+    .streaming = {-response(e: "▶️", t: "Qoşulur...")}
+    .queued-at =  #️⃣ | <b>{$position} mövqeyində növbəyə alınıb.</b>
+    .no-input = {-response(e: "❔", t: "Nə yayımlamaq istəyirsiniz?")}
 
 pause = {
     $result ->
-    [true] {-response(e: "⏸", t: "Paused.")}
+    [true] {-response(e: "⏸", t: "Fasilə verildi.")}
     [false] {-not-streaming}
     *[null] {-not-in-call}
 }
 
 resume = {
     $result ->
-    [true] {-response(e: "▶️", t: "Resumed.")}
+    [true] {-response(e: "▶️", t: "Davam etdi.")}
     [false] {-not-streaming}
     *[null] {-not-in-call}
 }
 
 skip = {
     $result ->
-    [true] {-response(e: "⏩", t: "Skipped.")}
+    [true] {-response(e: "⏩", t: "Atlandı.")}
     [false] {-not-streaming}
     *[null] {-not-in-call}
 }
 
 stop = {
     $result ->
-    [true] {-response(e: "⏹", t: "Stopped.")}
+    [true] {-response(e: "⏹", t: "Dayandı.")}
     [false] {-not-streaming}
     *[null] {-not-in-call}
 }
 
 mute = {
     $result ->
-    [true] {-response(e: "🔇", t: "Muted.")}
-    [false] {-error(t: "Already muted.")}
+    [true] {-response(e: "🔇", t: "Səssiz.")}
+    [false] {-error(t: "Artıq səssizdir.")}
     *[null] {-not-in-call}
 }
 
 unmute = {
     $result ->
-    [true] {-response(e: "🔈", t: "Unmuted.")}
-    [false] {-error(t: "Not muted.")}
+    [true] {-response(e: "🔈", t: "Səssizdən çıxarıldı.")}
+    [false] {-error(t: "Səssiz deyil.")}
     *[null] {-not-in-call}
 }
 
 loop = {
     $result ->
-    [true] {-response(e: "🔁", t: "Turned loop on.")}
-    *[false] {-response(e: "🔁", t: "Turned loop off.")}
+    [true] {-response(e: "🔁", t: "Döngə işə salındı.")}
+    *[false] {-response(e: "🔁", t: "Döngə söndürüldü.")}
 }
